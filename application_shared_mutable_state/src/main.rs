@@ -14,7 +14,7 @@ async fn index(data: web::Data<AppStateWithCounter>) -> String {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    // 전역(global) 공유 용로일 경우 HttpServer::new 이전(외부)에서 생성하여
+    // 전역(global) 공유 용도일 경우 HttpServer::new 이전(외부)에서 생성하여
     // clone으로 전달해야 함
     let counter = web::Data::new(AppStateWithCounter {
         counter: Mutex::new(0),
