@@ -1,12 +1,11 @@
-use actix_web::{get, HttpResponse, Responder, web};
+use actix_web::{get, HttpResponse, Scope, web};
 
-pub async fn get_scope() -> impl Responder {
+#[get("/")]
+async fn show_users() -> HttpResponse {
     HttpResponse::Ok().body("John, Jim, Cliff")
 }
 
 
-pub fn config(config: &mut web::ServiceConfig) {
-    config.service(
-        web::scope("/user/show_users").route()
-    )
+pub fn get_scope() -> Scope {
+    web::scope("/users").service(show_users)
 }
