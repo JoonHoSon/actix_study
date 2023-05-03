@@ -8,3 +8,5 @@ authors = ["JoonHo Son <joonho.son@me.com>"]
 
 [dependencies]
 actix-web = "4"
+log = "0.4.17"
+log4rs = "1.2.0"

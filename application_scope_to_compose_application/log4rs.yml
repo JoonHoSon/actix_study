@@ -1,0 +1,66 @@
+# https://m.blog.naver.com/sssang97/222028285589 참고
+# https://medium.com/@nikmas_dev/advanced-logging-in-rust-with-log4rs-2d712bb322de 참고
+
+refresh_rate: 30 seconds
+
+appenders:
+    stdout:
+        kind: console
+        filters:
+            - kind: threshold
+              level: debug
+
+    trace:
+        kind: file
+        filters:
+            - kind: threshold
+              level: trace
+        path: "logs/trace.log"
+        encoder:
+            pattern: "{d(%Y-%m-%d %H:%M:%S %Z)(utc)} | {({l}):5.5} | {f}:{L} - {m}{n}"
+
+    debug:
+        kind: file
+        filters:
+            - kind: threshold
+              level: debug
+        path: "logs/debug.log"
+        encoder:
+#            pattern: "{d(%Y-%m-%d %H:%M:%S %Z)(utc)} - {l}:{m}{n}"
+            pattern: "{d(%Y-%m-%d %H:%M:%S %Z)(utc)} | {({l}):5.5} | {f}:{L} - {m}{n}"
+
+    info:
+        kind: file
+        filters:
+            - kind: threshold
+              level: info
+        path: "logs/info.log"
+        encoder:
+            pattern: "{d(%Y-%m-%d %H:%M:%S %Z)(utc)} | {({l}):5.5} | {f}:{L} - {m}{n}"
+
+    warn:
+        kind: file
+        filters:
+            -   kind: threshold
+                level: warn
+        path: "logs/warn.log"
+        encoder:
+            pattern: "{d(%Y-%m-%d %H:%M:%S %Z)(utc)} | {({l}):5.5} | {f}:{L} - {m}{n}"
+
+    error:
+        kind: file
+        filters:
+            -   kind: threshold
+                level: error
+        path: "logs/error.log"
+        encoder:
+            pattern: "{d(%Y-%m-%d %H:%M:%S %Z)(utc)} | {({l}):5.5} | {f}:{L} - {m}{n}"
+
+root:
+    appenders:
+        - stdout
+        - trace
+        - debug
+        - info
+        - warn
+        - error

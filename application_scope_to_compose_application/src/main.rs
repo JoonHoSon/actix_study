@@ -1,4 +1,6 @@
+extern crate log4rs;
 use actix_web::{App, HttpServer};
+use log::{info};
 
 mod product;
 mod user;
@@ -9,10 +11,10 @@ mod user;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    // HttpServer::new(|| App::new().service(web::scope("/users").route("", web::get().to(test))))
-    //     .bind(("127.0.0.1", 8080))?
-    //     .run()
-    //     .await
+    log4rs::init_file("log4rs.yml", Default::default()).unwrap();
+
+    info!("Start application.");
+
     HttpServer::new(|| {
         App::new()
             .configure(user::get_scope)
